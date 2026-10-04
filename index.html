@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LUMINA — Limited Clothing</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#02050b;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-2;
+    background:
+        radial-gradient(circle at 50% 20%,rgba(0,110,255,.20),transparent 28%),
+        radial-gradient(circle at 10% 80%,rgba(0,55,160,.15),transparent 30%),
+        radial-gradient(circle at 90% 70%,rgba(0,100,255,.12),transparent 30%);
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:20;
+    opacity:.12;
+    background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+    background-size:50px 50px;
+}
+
+/* NAVBAR */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:50;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 7%;
+
+    background:rgba(2,5,11,.65);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo{
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:5px;
+}
+
+.insta{
+    text-decoration:none;
+    color:white;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+
+    padding:11px 18px;
+
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:50px;
+
+    transition:.3s;
+}
+
+.insta:hover{
+    background:white;
+    color:#02050b;
+    transform:translateY(-2px);
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    padding:120px 20px 70px;
+
+    position:relative;
+}
+
+.hero-content{
+    max-width:1000px;
+}
+
+.small-title{
+    display:inline-block;
+
+    padding:8px 15px;
+    margin-bottom:25px;
+
+    border-radius:50px;
+
+    border:1px solid rgba(90,160,255,.25);
+
+    background:rgba(20,80,160,.12);
+
+    color:#8bbcff;
+
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+h1{
+    font-size:clamp(70px,17vw,180px);
+    line-height:.8;
+
+    font-weight:900;
+    letter-spacing:-9px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff 0%,
+            #7890aa 18%,
+            #ffffff 35%,
+            #4b91ff 52%,
+            #ffffff 67%,
+            #8da4bd 82%,
+            #ffffff 100%
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+
+    filter:drop-shadow(0 0 35px rgba(45,125,255,.20));
+}
+
+.tagline{
+    margin-top:35px;
+
+    font-size:clamp(21px,4vw,34px);
+    font-weight:800;
+    letter-spacing:-1px;
+}
+
+.description{
+    max-width:600px;
+
+    margin:15px auto 0;
+
+    color:#8293aa;
+
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* CHROME HEART */
+
+.heart-container{
+    width:190px;
+    height:190px;
+
+    margin:45px auto 0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    animation:floatHeart 4s ease-in-out infinite;
+}
+
+.chrome-heart{
+    width:150px;
+    height:150px;
+
+    position:relative;
+
+    transform:rotate(-45deg);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #6f7882 12%,
+            #fdfdfd 25%,
+            #30363d 39%,
+            #ffffff 52%,
+            #777f88 67%,
+            #171b20 80%,
+            #f8f8f8 93%
+        );
+
+    border-radius:18px;
+
+    box-shadow:
+        0 0 10px rgba(255,255,255,.7),
+        0 0 30px rgba(65,145,255,.35),
+        0 25px 50px rgba(0,0,0,.65);
+
+    animation:chromeShine 3.5s linear infinite;
+}
+
+.chrome-heart::before,
+.chrome-heart::after{
+    content:"";
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #626a73,
+            #ffffff,
+            #24282d,
+            #dce2e8,
+            #3a4149
+        );
+}
+
+.chrome-heart::before{
+    top:-75px;
+    left:0;
+}
+
+.chrome-heart::after{
+    left:75px;
+    top:0;
+}
+
+.heart-highlight{
+    position:absolute;
+
+    width:75px;
+    height:13px;
+
+    background:rgba(255,255,255,.7);
+
+    border-radius:50%;
+
+    transform:rotate(45deg);
+
+    top:20px;
+    left:48px;
+
+    filter:blur(4px);
+
+    z-index:4;
+}
+
+@keyframes chromeShine{
+    0%{
+        filter:brightness(.8);
+    }
+
+    50%{
+        filter:brightness(1.45);
+    }
+
+    100%{
+        filter:brightness(.8);
+    }
+}
+
+@keyframes floatHeart{
+    0%,100%{
+        transform:translateY(0) rotate(0deg);
+    }
+
+    50%{
+        transform:translateY(-14px) rotate(2deg);
+    }
+}
+
+/* BUTTON */
+
+.shop-button{
+    display:inline-flex;
+
+    margin-top:38px;
+
+    padding:16px 27px;
+
+    border-radius:50px;
+
+    background:#f5f8ff;
+
+    color:#03060b;
+
+    text-decoration:none;
+
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:1px;
+
+    box-shadow:
+        0 0 30px rgba(70,145,255,.18);
+
+    transition:.3s;
+}
+
+.shop-button:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 15px 45px rgba(35,120,255,.35);
+}
+
+/* COLLECTION */
+
+.collection{
+    padding:110px 7%;
+}
+
+.section-heading{
+    text-align:center;
+}
+
+.section-heading h2{
+    font-size:clamp(35px,6vw,65px);
+    letter-spacing:-3px;
+}
+
+.section-heading p{
+    max-width:600px;
+    margin:15px auto 50px;
+
+    color:#718199;
+
+    font-size:13px;
+    line-height:1.7;
+}
+
+/* PRODUCTS */
+
+.products{
+    max-width:1100px;
+
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+}
+
+.product{
+    min-height:390px;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22,34,53,.75),
+            rgba(4,7,13,.95)
+        );
+
+    position:relative;
+
+    transition:.4s;
+}
+
+.product:hover{
+    transform:translateY(-9px);
+
+    border-color:rgba(70,145,255,.5);
+
+    box-shadow:
+        0 20px 60px rgba(0,75,180,.15);
+}
+
+/* CLOTHING ART */
+
+.product-image{
+    height:270px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    position:relative;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(40,130,255,.22),
+            transparent 55%
+        );
+}
+
+.shirt{
+    width:145px;
+    height:160px;
+
+    position:relative;
+
+    background:
+        linear-gradient(
+            120deg,
+            #05070b,
+            #394b61,
+            #080c12,
+            #172b46
+        );
+
+    clip-path:polygon(
+        25% 0,
+        40% 10%,
+        60% 10%,
+        75% 0,
+        100% 22%,
+        83% 42%,
+        72% 30%,
+        72% 100%,
+        28% 100%,
+        28% 30%,
+        17% 42%,
+        0 22%
+    );
+
+    filter:
+        drop-shadow(0 25px 25px rgba(0,0,0,.6));
+
+    transition:.5s;
+}
+
+.product:hover .shirt{
+    transform:scale(1.08) rotate(-3deg);
+}
+
+.product-info{
+    padding:0 22px 22px;
+}
+
+.product-info h3{
+    font-size:16px;
+    font-weight:800;
+}
+
+.product-info p{
+    margin-top:7px;
+
+    color:#708096;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1.5px;
+}
+
+/* BRAND STATEMENT */
+
+.statement{
+    padding:120px 20px;
+
+    text-align:center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,90,220,.15),
+            transparent 45%
+        );
+}
+
+.statement h2{
+    max-width:900px;
+
+    margin:auto;
+
+    font-size:clamp(35px,7vw,80px);
+
+    line-height:1;
+
+    letter-spacing:-4px;
+}
+
+.statement span{
+    background:
+        linear-gradient(
+            100deg,
+            #fff,
+            #4d99ff,
+            #fff
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.statement p{
+    margin:25px auto 0;
+
+    max-width:550px;
+
+    color:#7889a0;
+
+    font-size:13px;
+
+    line-height:1.8;
+}
+
+/* INSTAGRAM */
+
+.instagram-section{
+    padding:100px 20px;
+
+    text-align:center;
+}
+
+.instagram-section h2{
+    font-size:clamp(32px,6vw,60px);
+
+    letter-spacing:-3px;
+}
+
+.instagram-section p{
+    color:#74849b;
+
+    margin:15px 0 30px;
+
+    font-size:13px;
+}
+
+/* FOOTER */
+
+footer{
+    padding:35px 20px;
+
+    text-align:center;
+
+    border-top:1px solid rgba(255,255,255,.07);
+
+    color:#56667c;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+}
+
+footer strong{
+    color:#cbd6e5;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    nav{
+        padding:18px 5%;
+    }
+
+    .logo{
+        font-size:16px;
+        letter-spacing:4px;
+    }
+
+    .insta{
+        padding:9px 13px;
+        font-size:9px;
+    }
+
+    h1{
+        letter-spacing:-5px;
+    }
+
+    .products{
+        grid-template-columns:1fr;
+        max-width:420px;
+    }
+
+    .product{
+        min-height:360px;
+    }
+
+    .product-image{
+        height:240px;
+    }
+
+    .heart-container{
+        margin-top:35px;
+    }
+
+    .statement h2{
+        letter-spacing:-2px;
+    }
+}
+
+@media(max-width:380px){
+
+    h1{
+        font-size:65px;
+    }
+
+    .tagline{
+        font-size:19px;
+    }
+}
+
+/* PAGE LOADER */
+
+.loader{
+    position:fixed;
+    inset:0;
+
+    background:#02050b;
+
+    z-index:100;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transition:opacity .7s,visibility .7s;
+}
+
+.loader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.loader-logo{
+    font-size:25px;
+
+    font-weight:900;
+
+    letter-spacing:7px;
+
+    animation:loaderPulse 1.2s infinite alternate;
+}
+
+@keyframes loaderPulse{
+    from{
+        opacity:.3;
+        transform:scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+
+<div class="loader" id="loader">
+    <div class="loader-logo">LUMINA</div>
+</div>
+
+<!-- NAV -->
+
+<nav>
+
+    <div class="logo">
+        LUMINA
+    </div>
+
+    <a href="#instagram" class="insta">
+        INSTAGRAM ↗
+    </a>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="small-title">
+            LIMITED CLOTHING / EST. 2026
+        </div>
+
+        <h1>
+            LUMINA
+        </h1>
+
+        <div class="tagline">
+            Yo gang, welcome to LUMINA.
+        </div>
+
+        <p class="description">
+            Not made for everyone. Made for the ones who move different.
+            Limited pieces, clean silhouettes and a futuristic state of mind.
+        </p>
+
+        <!-- CHROME HEART -->
+
+        <div class="heart-container">
+
+            <div class="chrome-heart">
+
+                <div class="heart-highlight"></div>
+
+            </div>
+
+        </div>
+
+        <a href="#collection" class="shop-button">
+            VISIT LUMINA FOR LIMITED CLOTHES ↓
+        </a>
+
+    </div>
+
+</section>
+
+<!-- COLLECTION -->
+
+<section class="collection" id="collection">
+
+    <div class="section-heading">
+
+        <h2>
+            THE DROP.
+        </h2>
+
+        <p>
+            Small drops. Big energy. Pieces designed to stand out
+            without trying too hard.
+        </p>
+
+    </div>
+
+    <div class="products">
+
+        <div class="product">
+
+            <div class="product-image">
+                <div class="shirt"></div>
+            </div>
+
+            <div class="product-info">
+
+                <h3>
+                    LUMINA / 01
+                </h3>
+
+                <p>
+                    Midnight Essential
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image">
+                <div class="shirt"></div>
+            </div>
+
+            <div class="product-info">
+
+                <h3>
+                    LUMINA / 02
+                </h3>
+
+                <p>
+                    Chrome Edition
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image">
+                <div class="shirt"></div>
+            </div>
+
+            <div class="product-info">
+
+                <h3>
+                    LUMINA / 03
+                </h3>
+
+                <p>
+                    After Dark
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- STATEMENT -->
+
+<section class="statement">
+
+    <h2>
+        WEAR THE
+        <span>UNEXPECTED.</span>
+    </h2>
+
+    <p>
+        LUMINA is for the ones who don't follow the room.
+        They change the atmosphere.
+    </p>
+
+</section>
+
+<!-- INSTAGRAM -->
+
+<section class="instagram-section" id="instagram">
+
+    <h2>
+        STAY IN THE LOOP.
+    </h2>
+
+    <p>
+        New drops. Limited pieces. No unnecessary noise.
+    </p>
+
+    <a
+        href="#"
+        class="shop-button"
+        onclick="openInstagram(); return false;"
+    >
+        FOLLOW LUMINA ↗
+    </a>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <strong>LUMINA</strong>
+    &nbsp; — &nbsp;
+    LIMITED CLOTHING
+
+</footer>
+
+
+<script>
+
+/* PAGE LOADER */
+
+window.addEventListener("load",function(){
+
+    setTimeout(function(){
+
+        document
+        .getElementById("loader")
+        .classList.add("hide");
+
+    },900);
+
+});
+
+
+/* INSTAGRAM BUTTON */
+
+function openInstagram(){
+
+    const a = "https://";
+    const b = "www.instagram.com/";
+    const c = "bskrchttt.t4/";
+    
+    window.location.href = a + b + c;
+
+}
+
+
+/* HEART CLICK EFFECT */
+
+const heart = document.querySelector(".chrome-heart");
+
+heart.addEventListener("click",function(){
+
+    this.style.transform =
+        "rotate(-45deg) scale(1.12)";
+
+    setTimeout(function(){
+
+        heart.style.transform =
+            "rotate(-45deg) scale(1)";
+
+    },250);
+
+});
+
+
+/* SCROLL REVEAL */
+
+const cards =
+document.querySelectorAll(".product");
+
+const observer =
+new IntersectionObserver(
+    function(entries){
+
+        entries.forEach(function(entry){
+
+            if(entry.isIntersecting){
+
+                entry.target.style.opacity="1";
+                entry.target.style.transform="translateY(0)";
+
+            }
+
+        });
+
+    },
+    {
+        threshold:.15
+    }
+);
+
+
+cards.forEach(function(card){
+
+    card.style.opacity="0";
+    card.style.transform="translateY(30px)";
+    card.style.transition="opacity .7s, transform .7s";
+
+    observer.observe(card);
+
+});
+
+</script>
+
+</body>
+      </html>
